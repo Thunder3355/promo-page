@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nandon Ketchup - Unparalleled Taste!</title>
+    <style>
+        :root {
+            --primary-red: #f08a8e;
+            --dark-red: #cc6c70;
+            --light-red: #ffb4b7;
+            --accent-yellow: #ffcc00;
+            --text-color: #333;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        
+        .header {
+            background-color: var(--primary-red);
+            width: 100%;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-yellow);
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/кетчуп.jpeg') center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 1rem;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-yellow);
+            color: var(--text-color);
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: #ffe066;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .features {
+            padding: 5rem 1rem;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-red);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-red);
+            margin: 1rem auto;
+        }
+        
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: calc(33.333% - 2rem);
+            min-width: 280px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            background-color: var(--light-red);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon img {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+        }
+        
+        .feature-description {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .products {
+            padding: 5rem 1rem;
+            background-color: #f9f9f9;
+        }
+        
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: calc(25% - 2rem);
+            min-width: 250px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-red);
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark-red);
+            margin-bottom: 1rem;
+        }
+        
+        .product-button {
+            background-color: var(--primary-red);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-button:hover {
+            background-color: var(--dark-red);
+            transform: scale(1.05);
+        }
+        
+        .testimonials {
+            padding: 5rem 1rem;
+            background-color: var(--primary-red);
+            color: var(--white);
+        }
+        
+        .testimonials .section-title {
+            color: var(--white);
+        }
+        
+        .testimonials .section-title::after {
+            background-color: var(--white);
+        }
+        
+        .testimonials-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            width: calc(33.333% - 2rem);
+            min-width: 280px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+        
+        .contact {
+            padding: 5rem 1rem;
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            width: 100%;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .submit-button {
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: center;
+        }
+        
+        .submit-button:hover {
+            background-color: var(--dark-red);
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            background-color: #222;
+            color: var(--white);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-yellow);
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .footer-link {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--accent-yellow);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent-yellow);
+            transform: rotate(15deg);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background-color: var(--primary-red);
+            padding: 1rem;
+            z-index: 999;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-red);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        .ketchup-splash {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: url('/api/placeholder/150/150');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        @media screen and (max-width: 992px) {
+            .feature-card, .testimonial-card {
+                width: calc(50% - 2rem);
+            }
+            
+            .product-card {
+                width: calc(33.333% - 2rem);
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+            
+            .mobile-menu.active {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .feature-card, .testimonial-card, .product-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-section {
+                width: 100%;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .cta-button, .submit-button {
+                font-size: 1rem;
+                padding: 0.75rem 1.5rem;
+            }
+        }
+        
+        .zoom-effect {
+            transition: transform 0.5s ease;
+        }
+        
+        .zoom-effect:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Nandon</div>
+        <nav class="nav">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#products" class="nav-link">Products</a>
+            <a href="#testimonials" class="nav-link">Testimonials</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <button class="mobile-menu-button">☰</button>
+    </header>
+    
+    <div class="mobile-menu">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#products" class="nav-link">Products</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    
+    <section class="hero">
+        <h1 class="fade-in">Nandon Ketchup</h1>
+        <p class="fade-in delay-1">The true taste of tomatoes with the right balance of spices and seasonings. Made with love for true quality connoisseurs.</p>
+        <button class="cta-button fade-in delay-2">Try Now</button>
+    </section>
+    
+    <section class="features" id="features">
+        <h2 class="section-title">Why Nandon?</h2>
+        <div class="features-container">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">
+                    <img src="/quality.png" alt="Quality">
+                </div>
+                <h3 class="feature-title">Top Quality</h3>
+                <p class="feature-description">Only selected tomatoes grown on environmentally friendly plantations are used to make our premium ketchup.</p>
+            </div>
+            
+            <div class="feature-card fade-in delay-1">
+                <div class="feature-icon">
+                    <img src="/leaves.png" alt="Natural">
+                </div>
+                <h3 class="feature-title">100% Natural</h3>
+                <p class="feature-description">No artificial colors, preservatives, or flavor enhancers. Only natural ingredients for healthy eating.</p>
+            </div>
+            
+            <div class="feature-card fade-in delay-2">
+                <div class="feature-icon">
+                    <img src="/taste.png" alt="Taste">
+                </div>
+                <h3 class="feature-title">Unique Taste</h3>
+                <p class="feature-description">A unique recipe with a secret blend of spices makes our ketchup recognizable and unique from the first spoonful.</p>
+            </div>
+            
+            <div class="feature-card fade-in delay-3">
+                <div class="feature-icon">
+                    <img src="/decoration.png" alt="Traditions">
+                </div>
+                <h3 class="feature-title">Family Traditions</h3>
+                <p class="feature-description">Over 50 years of experience in sauce production, based on traditional recipes passed down from generation to generation.</p>
+            </div>
+            
+            <div class="feature-card fade-in delay-4">
+                <div class="feature-icon">
+                    <img src="/save-the-world.png" alt="Ecology">
+                </div>
+                <h3 class="feature-title">Eco-friendly</h3>
+                <p class="feature-description">We care about nature and use recyclable packaging to minimize environmental impact.</p>
+            </div>
+            
+            <div class="feature-card fade-in delay-5">
+                <div class="feature-icon">
+                    <img src="/versatility.png" alt="Versatility">
+                </div>
+                <h3 class="feature-title">Versatility</h3>
+                <p class="feature-description">The perfect complement to any dish: from burgers and hot dogs to pasta and pizza. Suitable for any cuisine in the world.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="products" id="products">
+        <h2 class="section-title">Our Products</h2>
+        <div class="products-container">
+            <div class="product-card fade-in">
+                <img src="/кетчуп(1).jpeg" alt="Classic Ketchup" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Classic</h3>
+                    <p class="product-price">$5.99</p>
+                    <button class="product-button">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in delay-1">
+                <img src="/Designer(1).jpeg" alt="Spicy Ketchup" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Spicy</h3>
+                    <p class="product-price">$6.99</p>
+                    <button class="product-button">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in delay-2">
+                <img src="/чесночный кетчуп.jpeg" alt="Garlic Ketchup" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">With Garlic</h3>
+                    <p class="product-price">$7.49</p>
+                    <button class="product-button">Add to Cart</button>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in delay-3">
+                <img src="/Designer.jpeg" alt="Grill Ketchup" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">For Grill</h3>
+                    <p class="product-price">$8.99</p>
+                    <button class="product-button">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">Customer Reviews</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card fade-in">
+                <p class="testimonial-text">"I've never tasted better ketchup! Nandon has become an indispensable ingredient in my kitchen. The perfect balance of tartness and sweetness."</p>
+                <div class="testimonial-author">
+                    <img src="/api/placeholder/50/50" alt="Avatar" class="testimonial-avatar">
+                    <div>Elena Smirnova</div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in delay-1">
+                <p class="testimonial-text">"As a chef, I'm very demanding about products. Nandon Ketchup is truly premium quality that complements my dishes without overpowering their taste."</p>
+                <div class="testimonial-author">
+                    <img src="/api/placeholder/50/50" alt="Avatar" class="testimonial-avatar">
+                    <div>Alexander Petrov</div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in delay-2">
+                <p class="testimonial-text">"My kids used to be very picky about sauces, but with Nandon, the problem is solved! Now they ask to add ketchup to almost every dish."</p>
+                <div class="testimonial-author">
+                    <img src="/api/placeholder/50/50" alt="Avatar" class="testimonial-avatar">
+                    <div>Maria Ivanova</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" class="form-input">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" class="form-input">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Your Message" class="form-textarea"></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">Nandon</h3>
+                <p>Premium sauce manufacturer since 1972. We make ketchup that everyone will love!</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="footer-link">Home</a></li>
+                    <li><a href="#features" class="footer-link">Features</a></li>
+                    <li><a href="#products" class="footer-link">Products</a></li>
+                    <li><a href="#testimonials" class="footer-link">Testimonials</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="footer-title">Contact Us</h3>
+                <ul class="footer-links">
+                    <li>Phone: +1 (555) 123-4567</li>
+                    <li>Email: info@nandon.com</li>
+                    <li>Address: 123 Tomato Street, New York, NY</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Nandon. All rights reserved.
+        </div>
+    </footer>
+    
+    <div class="back-to-top">↑</div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 60,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    // Close mobile menu if it's open
+                    mobileMenu.classList.remove('active');
+                });
+            });
+            
+            // Back to top button functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Add ketchup splash elements randomly
+            const body = document.querySelector('body');
+            for (let i = 0; i < 5; i++) {
+                const splash = document.createElement('div');
+                splash.classList.add('ketchup-splash');
+                splash.style.top = Math.random() * 100 + '%';
+                splash.style.left = Math.random() * 100 + '%';
+                splash.style.transform = `rotate(${Math.random() * 360}deg)`;
+                body.appendChild(splash);
+            }
+            
+            // Fade in elements when they come into view
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in').forEach(element => {
+                element.style.animationPlayState = 'paused';
+                observer.observe(element);
+            });
+            
+            // Product buttons functionality
+            const productButtons = document.querySelectorAll('.product-button');
+            
+            productButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.parentElement.querySelector('.product-title').textContent;
+                    
+                    // Save product to cart (could be enhanced to use localStorage)
+                    alert(`Товар "${productName}" добавлен в корзину!`);
+                    
+                    // Animation effect
+                    this.textContent = 'Добавлено!';
+                    this.style.backgroundColor = '#28a745';
+                    
+                    setTimeout(() => {
+                        this.textContent = 'В корзину';
+                        this.style.backgroundColor = '';
+                    }, 2000);
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.querySelector('.contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const nameInput = this.querySelector('input[type="text"]');
+                const emailInput = this.querySelector('input[type="email"]');
+                const messageInput = this.querySelector('textarea');
+                
+                // Basic validation
+                if (!nameInput.value || !emailInput.value || !messageInput.value) {
+                    alert('Пожалуйста, заполните все поля формы.');
+                    return;
+                }
+                
+                // Here you would normally send data to a server
+                alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+                
+                // Reset form
+                this.reset();
+            });
+            
+            // CTA button animation
+            const ctaButton = document.querySelector('.cta-button');
+            
+            ctaButton.addEventListener('click', function() {
+                // Smooth scroll to products section
+                const productsSection = document.querySelector('#products');
+                
+                window.scrollTo({
+                    top: productsSection.offsetTop - 60,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Add hover effects to product images
+            const productImages = document.querySelectorAll('.product-image');
+            
+            productImages.forEach(image => {
+                image.classList.add('zoom-effect');
+            });
+            
+            // Initialize animation for hero section
+            document.querySelectorAll('.hero .fade-in').forEach(element => {
+                element.style.animationPlayState = 'running';
+            });
+        });
+    </script>
+</body>
+</html>
